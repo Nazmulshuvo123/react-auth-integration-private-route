@@ -1,14 +1,26 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../Provider/AuthProvider";
 
 const Register = () => {
+
+  const {createUser} = useContext(authContext);
+
     const handleRegister = (e) =>{
         e.preventDefault();
         const name = e.target.name.value;
-        const photo = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(name, photo, email, password);
+        console.log(name, email, password);
 
+        //create user
+        createUser(email, password)
+         .then(result =>{
+          console.log(result.user)
+         })
+         .catch(error =>{
+          console.log('ERROR', error.message)
+         })
     }
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -23,25 +35,14 @@ const Register = () => {
                 <span className="label-text">Name</span>
               </label>
               <input
-                type="name"
-                name="name"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Photo URL</span>
-              </label>
-              <input
                 type="text"
-                name="photo"
-                placeholder="Photo URL"
+                name="name"
+                placeholder="name"
                 className="input input-bordered"
                 required
               />
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -68,6 +69,7 @@ const Register = () => {
               />
               
             </div>
+
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>
