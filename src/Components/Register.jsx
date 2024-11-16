@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { authContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
 
-  const {createUser} = useContext(authContext);
+  const {createUser} = useContext(AuthContext);
 
     const handleRegister = (e) =>{
         e.preventDefault();
@@ -26,7 +26,7 @@ const Register = () => {
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col p-10">
         <div className="text-center ">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+          <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl p-10">
           <form onSubmit={handleRegister} className="card-body">

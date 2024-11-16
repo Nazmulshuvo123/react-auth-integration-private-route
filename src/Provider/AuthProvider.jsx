@@ -1,41 +1,49 @@
-import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import {createUserWithEmailAndPassword,  onAuthStateChanged,  signInWithEmailAndPassword } from "firebase/auth";
 import { createContext, useState } from "react";
 import { auth } from "../firebase.init";
 
-export const authContext = createContext(null);
+export const AuthContext = createContext(null)
+
 
 const AuthProvider = ({ children }) => {
   const name = "Inaya Adib";
  
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState(null)
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
-
-  const signInUser = (email, password) => {
+  
+  const signInUser = (email, password) =>{
     return signInWithEmailAndPassword(auth, email, password);
-  };
+    
+  }
 
-  onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      console.log("Currently logged in", currentUser);
-      setUser(currentUser)
-    } else {
-      console.log("No user logged in");
-      setUser(null)
-    }
-  });
+  // onAuthStateChanged(auth, currentUser =>{
+  //   if(currentUser){
+  //     console.log("Login current user", currentUser);
+  //     setUser(currentUser)
+  //   }
+  //   else{
+  //     console.log("No user login")
+  //     setUser(null)
+  //   }
+  // })
+  
+
 
   const authInfo = {
-    name,
+    name, 
     user,
     createUser,
-    signInUser,
+    signInUser
+    
+    
   };
   return (
-    <authContext.Provider value={authInfo}>{children}</authContext.Provider>
+    <AuthContext.Provider value={authInfo}>
+        {children}
+    </AuthContext.Provider>
   );
 };
 

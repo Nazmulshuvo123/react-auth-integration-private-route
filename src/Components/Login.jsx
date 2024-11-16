@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { authContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../Provider/AuthProvider";
+
 
 const Login = () => {
-  const { signInUser } = useContext(authContext);
-
+  
+  const {signInUser} = useContext(AuthContext)
   const handleLogin = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
@@ -13,12 +14,12 @@ const Login = () => {
 
     //Login user
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.log("ERROR", error.message);
-      });
+    .then(result =>{
+      console.log(result.user)
+    })
+    .catch(error =>{
+      console.log('Error', error.message)
+    })
   };
 
   return (
